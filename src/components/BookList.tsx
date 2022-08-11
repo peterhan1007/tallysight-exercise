@@ -1,35 +1,94 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import {
   Stack,
   Box,
-  List,
-  ListItem,
   Text,
-  StackDivider,
   useColorModeValue,
-  Button,
-  Link,
   Flex,
+  UnorderedList,
+  ListItem,
+  Button,
+  Image,
 } from "@chakra-ui/react";
 
+interface BookType {
+  image: string;
+  title: string;
+  infos: Array<string>;
+  button_title: string;
+}
 const BookList: React.FC = (): JSX.Element => {
-  const Item = () => {
+  const [data, setData] = useState([] as BookType[]);
+
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  const getBooks = async () => {
+    const res = await fetch(
+      "https://api.airtable.com/v0/appDFOzemd24MG2CZ/sportsbooks",
+      {
+        headers: {
+          authorization: "Bearer keyv05VZXGSFfVKO4",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      console.error("Error");
+      return;
+    }
+
+    await res.json().then((res) => {
+      setData(res.records);
+    });
+  };
+
+  const Item = ({ book }: { book: ReactNode | any }) => {
+    const bookData = book.fields;
+
     return (
-      <Box>
+      <Box borderRadius={"8px"} my="5px">
         <Box
-          fontSize={{ base: "18px", lg: "20px" }}
           fontWeight={"bold"}
           mb={"4"}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"space-between"}
-        ></Box>
+          px={"15px"}
+          py={"10px"}
+        >
+          <Flex alignItems={"center"}>
+            <Flex>
+              <Box mr={"30px"}>
+                <Image
+                  width="50px"
+                  height="50px"
+                  src={bookData.Logo[0].url}
+                ></Image>
+              </Box>
+              <Box mr={"30px"}>{bookData.Name}</Box>
+              <Box mr={"30px"}>
+                <Text fontSize={"24px"}>{bookData.Promotion}</Text>
+                <UnorderedList>
+                  <ListItem>Up to $1, 500 Risk-Free First Bet</ListItem>
+                  <ListItem>First Bet Insurance Up To $1, 500</ListItem>
+                </UnorderedList>
+              </Box>
+            </Flex>
+            <Box ml="200px">
+              <Button py={"30px"} fontSize={"26px"} colorScheme="messenger">
+                {bookData.CTA}
+              </Button>
+            </Box>
+          </Flex>
+        </Box>
       </Box>
     );
   };
 
   return (
-    <Stack mt={"50px"}>
+    <Stack mt={"50px"} px={"150px"}>
       <Box as={"header"}>
         <Text
           color={useColorModeValue("gray.900", "gray.400")}
@@ -46,16 +105,10 @@ const BookList: React.FC = (): JSX.Element => {
           Neighbor state is 234 miles away from you
         </Text>
       </Box>
-      <Stack
-        spacing={{ base: 4, sm: 6 }}
-        direction={"column"}
-        divider={
-          <StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.600")}
-          />
-        }
-      >
-        <Item />
+      <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+        {data?.map((book: BookType, index) => {
+          return <Item book={book} />;
+        })}
       </Stack>
     </Stack>
   );

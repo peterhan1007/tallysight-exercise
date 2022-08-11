@@ -8,10 +8,10 @@ import {
   Text,
   Image,
   useDisclosure,
-  useColorModeValue,
   Stack,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Links = ["BEST ODDS", "EXPERT PICKS", "RANKINGS", "SIGN UP"];
 
@@ -24,7 +24,6 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
     fontSize={"18px"}
     fontWeight={"bold"}
     color={"grey"}
@@ -42,7 +41,7 @@ export default function Header() {
         px={"150px"}
         mt={"40px"}
         borderBottom="3px"
-        borderBottomColor="gray.200"
+        borderBottomColor="gray.300"
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
