@@ -48,26 +48,25 @@ const BookList: React.FC = (): JSX.Element => {
     const bookData = book.fields;
 
     return (
-      <Box borderRadius={"8px"} my="5px">
+      <Box borderRadius={"14px"} border="2px" borderColor="gray.200" my="5px">
         <Box
           fontWeight={"bold"}
           mb={"4"}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"space-between"}
-          px={"15px"}
-          py={"10px"}
+          px={"25px"}
+          py={"20px"}
         >
           <Flex alignItems={"center"}>
             <Flex>
-              <Box mr={"30px"}>
+              <Box mr={"50px"}>
                 <Image
-                  width="50px"
-                  height="50px"
+                  width="180px"
+                  height="80px"
                   src={bookData.Logo[0].url}
                 ></Image>
               </Box>
-              <Box mr={"30px"}>{bookData.Name}</Box>
               <Box mr={"30px"}>
                 <Text fontSize={"24px"}>{bookData.Promotion}</Text>
                 <UnorderedList>
@@ -76,8 +75,13 @@ const BookList: React.FC = (): JSX.Element => {
                 </UnorderedList>
               </Box>
             </Flex>
-            <Box ml="200px">
-              <Button py={"30px"} fontSize={"26px"} colorScheme="messenger">
+            <Box ml="150px">
+              <Button
+                py={"30px"}
+                width="170px"
+                fontSize={"26px"}
+                colorScheme="messenger"
+              >
                 {bookData.CTA}
               </Button>
             </Box>
@@ -107,7 +111,7 @@ const BookList: React.FC = (): JSX.Element => {
       </Box>
       <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
         {data?.map((book: BookType, index) => {
-          return <Item book={book} />;
+          return <Item book={book} key={index} />;
         })}
       </Stack>
     </Stack>

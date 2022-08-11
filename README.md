@@ -1,59 +1,76 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# Tallysight Coding Test
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+- Clone this repo and create a new branch.
+- Create [Next.js](https://nextjs.org/) project with Typescript.
+  - Get familiar with Static Generation, Server-Side Rendering, and API Routes.
+  - Do not change contents of `tsconfig.json` and `.eslintrc.json`.
+- Install [ChakraUI](https://chakra-ui.com/).
+  - We'll use ChakraUI for all UI elements. Please get familiar with it:
+    - https://chakra-ui.com/docs/components/overview
+    - https://pro.chakra-ui.com/components/free
+- Install and configure any dev dependency you usually use (e.g. `prettier`, `lint-staged`, etc.)
 
-### `yarn start`
+## Design
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](design.png)
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+## Tasks
 
-### `yarn test`
+```
+- Please read all tasks before you start.
+- Complete tasks in order.
+- Do not skip tasks unless you get stuck.
+```
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+### 1. Geolocation _(data coming from SSR)_
 
-### `yarn build`
+- Use [ipinfo.io](https://ipinfo.io/) free account to obtain the visitor's state.
+- **Do not use** their client library, use native functions already available with the [current Setup](#setup).
+- Show the visitor's state as shown in the design. _`{STATE}`_
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+### 2. Neighbor State _(data coming from an API Route)_
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+- Using [states.json](states.json), find nearest state to the visitor's state that was provided by [Geolocation.](#2-geolocation-coming-from-ssr)
+  ```
+  Tip: Haversine formula.
+  ```
+- Read from the file somehow, not copy/paste.
+- Show nearest state and the distance as shown in the design. _`{Neighbor state}`_
+- Bonus: show a loading spinner while fetching the data (you may want to add an artificial delay of 1 second).
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+### 3. List of offers _(data coming from SSR)_
 
-### `yarn eject`
+- Implement list of offers from the design.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  ```
+  Tip: VStack and HStacks.
+  ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+- Fetch list of offers from [this endpoint](https://api.airtable.com/v0/appDFOzemd24MG2CZ/sportsbooks) using bearer token `keyv05VZXGSFfVKO4`.
+- Use `URL` (from API response) for the blue buttons.
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
+  Updated ipinfo token: 3f26802b4fde0
 
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
+### 4. Navigation Bar
 
-## Learn More
+- Use [this logo](https://tallysight.com/ts-logo.png).
+- Use empty pages for the navigation links.
 
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 5. Footer
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Dynamic year.
+
+### Optional
+
+- If you still have enough time and want to go beyond, please feel free to add anything you think this page could benefit from or anything you feel would showcase your skills.
+
+---
+
+## Notes
+
+- Store token in an environment variable and secured from public access.
+- Include the environment file so we can easily run your project.
+- Always keep accessibility and responsiveness in mind for every UI element.
+- Use the [current Setup](#setup) without installing any extra packages, unless it's a package you think you need to make progress.
