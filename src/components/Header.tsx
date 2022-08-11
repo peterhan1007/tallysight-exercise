@@ -42,7 +42,7 @@ export default function Header() {
         mt={"40px"}
         borderBottom="3px"
         borderStyle={"solid"}
-        borderColor="gray.500"
+        borderColor="gray.200"
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton

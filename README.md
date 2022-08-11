@@ -51,7 +51,7 @@
 - Fetch list of offers from [this endpoint](https://api.airtable.com/v0/appDFOzemd24MG2CZ/sportsbooks) using bearer token `keyv05VZXGSFfVKO4`.
 - Use `URL` (from API response) for the blue buttons.
 
-  Updated ipinfo token: 3f26802b4fde0
+  Updated ipinfo token: 3f26802b4fde0f
 
 ### 4. Navigation Bar
 
